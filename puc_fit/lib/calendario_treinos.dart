@@ -1,16 +1,74 @@
 import 'package:flutter/material.dart';
 import 'exercicios_feito_dia.dart';
 
-class DaysScreen extends StatelessWidget {
-  final List<String> days = ['Dia 1', 'Dia 2', 'Dia 3', 'Dia 4', 'Dia 5', 'Dia 6', 'Dia 7'];
+class CalendarioTreinos extends StatelessWidget {
+  final List<String> days = [
+    'Dia 01/01/2024',
+    'Dia 02/01/2024',
+    'Dia 03/01/2024',
+    'Dia 04/01/2024',
+    'Dia 05/01/2024',
+    'Dia 06/01/2024',
+    'Dia 07/01/2024',
+  ];
+
+  void _showExercisesDialog(BuildContext context, String day) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(day),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: Icon(Icons.fitness_center),
+                title: Text('Exercício 1: exemplo-exercicio'),
+                trailing: Text('x3'),
+              ),
+              ListTile(
+                leading: Icon(Icons.fitness_center),
+                title: Text('Exercício 2: exemplo-exercicio'),
+                trailing: Text('x3'),
+              ),
+              ListTile(
+                leading: Icon(Icons.fitness_center),
+                title: Text('Exercício 3: exemplo-exercicio'),
+                trailing: Text('x3'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exercícios por Dia'),
+        backgroundColor: Colors.blueGrey[900],
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {},
+        ),
+        title: Center(child: Text("LOGO")),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {},
+          ),
+        ],
       ),
-      backgroundColor: Colors.grey[300], 
+      backgroundColor: Colors.grey[300],
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -20,39 +78,34 @@ class DaysScreen extends StatelessWidget {
               child: Text(
                 'Exercícios Concluídos',
                 style: TextStyle(
-                  color: Colors.black, // Cor do texto em preto
+                  color: Colors.black,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold, // Texto em negrito
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 16.0), // Espaço entre o título e os cards
+            SizedBox(height: 16.0),
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Define 2 cards por linha
-                  crossAxisSpacing: 10.0, // Espaçamento horizontal entre os cards
-                  mainAxisSpacing: 10.0, // Espaçamento vertical entre os cards
-                  childAspectRatio: 3 / 2, // Proporção dos cards (largura / altura)
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: 3 / 2,
                 ),
                 itemCount: days.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Color(0xFF4C5285), // Cor de fundo #4C5285
+                    color: Color(0xFF4C5285),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ExerciosFeitosDia(day: days[index]),
-                          ),
-                        );
+                        _showExercisesDialog(context, days[index]);
                       },
                       child: Center(
                         child: Text(
                           days[index],
                           style: TextStyle(
-                            color: Colors.white, // Texto branco para contraste
+                            color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
