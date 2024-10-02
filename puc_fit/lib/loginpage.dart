@@ -51,7 +51,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        Navigator.pushNamed(context, '/calendarioTreinos');
+                      });
+                    },
                     child: const Text('Entrar'),
                   ),
                   const SizedBox(height: 4),

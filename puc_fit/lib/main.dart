@@ -4,6 +4,7 @@ import 'cadastro_treinos.dart';
 import 'package:puclifters/loginpage.dart';
 import 'chave_de_acesso.dart';
 import 'perfil_usuario.dart';
+import 'calendario_treinos.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/chave': (context) => const RegisterPage(),
         '/perfil': (context) => const TelaPerfil(),
+        '/calendarioTreinos': (context) => CalendarioTreinos(),
       },
     );
   }
