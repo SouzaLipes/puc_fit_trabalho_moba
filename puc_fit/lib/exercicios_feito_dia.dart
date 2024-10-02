@@ -19,12 +19,12 @@ class ExerciosFeitosDia extends StatelessWidget {
       appBar: AppBar(
         title: Text('Ficha de Exercícios - $day'),
       ),
-      backgroundColor: Colors.grey[300], // Fundo cinza para a tela de exercícios
+      backgroundColor: Colors.grey[300], 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Card(
-            color: Color(0xFF4C5285), // Cor de fundo do card #4C5285
+            color: Color(0xFF4C5285), 
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -33,13 +33,13 @@ class ExerciosFeitosDia extends StatelessWidget {
                   Text(
                     'Lista de Exercícios Feitos',
                     style: TextStyle(
-                      color: Colors.white, // Cor do texto em branco
+                      color: Colors.white, 
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 10.0), // Espaço entre o título e a lista
+                  SizedBox(height: 10.0), 
                   Expanded(
                     child: ListView.builder(
                       itemCount: exercises.length,
@@ -49,7 +49,7 @@ class ExerciosFeitosDia extends StatelessWidget {
                           child: Text(
                             exercises[index],
                             style: TextStyle(
-                              color: Colors.white, // Cor do texto em branco
+                              color: Colors.white, 
                               fontSize: 16,
                             ),
                           ),
