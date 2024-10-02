@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'exercise_screen.dart';
-import 'days_screen.dart';
+import 'calendario_treinos.dart'; 
 
 void main() {
   runApp(MyApp());
@@ -10,10 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => ExerciseScreen(),
-      },
+      home: CalendarioTreinos(),
     );
   }
 }
