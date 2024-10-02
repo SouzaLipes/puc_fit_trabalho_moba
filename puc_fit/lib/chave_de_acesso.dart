@@ -1,4 +1,8 @@
+import 'package:flutter/material.dart';
+
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -6,7 +10,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
@@ -28,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[100], 
+      backgroundColor: Colors.lightBlue[100],
       appBar: AppBar(
         title: const Text('Cadastro'),
         backgroundColor: Colors.blue[500],
@@ -69,7 +74,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 validator: _validatePassword,
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Confirme a Senha'),
+                decoration:
+                    const InputDecoration(labelText: 'Confirme a Senha'),
                 obscureText: true,
                 controller: _confirmPasswordController,
                 validator: _validateConfirmPassword,
@@ -80,7 +86,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (_formKey.currentState!.validate()) {
                     // Se todos os campos forem válidos, exibir uma mensagem
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Cadastro realizado com sucesso!')),
+                      const SnackBar(
+                          content: Text('Cadastro realizado com sucesso!')),
                     );
                   }
                 },

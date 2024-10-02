@@ -12,13 +12,15 @@ class CalendarioTreinos extends StatelessWidget {
     'Dia 07/01/2024',
   ];
 
+  CalendarioTreinos({super.key});
+
   void _showExercisesDialog(BuildContext context, String day) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(day),
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
@@ -40,7 +42,7 @@ class CalendarioTreinos extends StatelessWidget {
           ),
           actions: [
             TextButton(
-              child: Text('Fechar'),
+              child: const Text('Fechar'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -57,13 +59,13 @@ class CalendarioTreinos extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[900],
         leading: IconButton(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           onPressed: () {},
         ),
-        title: Center(child: Text("LOGO")),
+        title: const Center(child: Text("LOGO")),
         actions: [
           IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {},
           ),
         ],
@@ -74,7 +76,7 @@ class CalendarioTreinos extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
+            const Center(
               child: Text(
                 'Exercícios Concluídos',
                 style: TextStyle(
@@ -84,10 +86,10 @@ class CalendarioTreinos extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 10.0,
@@ -96,7 +98,7 @@ class CalendarioTreinos extends StatelessWidget {
                 itemCount: days.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Color(0xFF4C5285),
+                    color: const Color(0xFF4C5285),
                     child: InkWell(
                       onTap: () {
                         _showExercisesDialog(context, days[index]);
@@ -104,7 +106,7 @@ class CalendarioTreinos extends StatelessWidget {
                       child: Center(
                         child: Text(
                           days[index],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
