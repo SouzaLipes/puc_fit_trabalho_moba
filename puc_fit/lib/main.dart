@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'tela_calculo_imc.dart'; 
+import 'exercise_screen.dart';
+import 'days_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,6 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: IMCCalculator(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => ExerciseScreen(),
+        '/days': (context) => DaysScreen(),
+        '/imc': (context) => IMCCalculator(),
+      },
     );
   }
 }
