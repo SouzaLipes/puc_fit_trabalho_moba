@@ -5,6 +5,7 @@ class TelaPerfil extends StatefulWidget {
   @override
   State<TelaPerfil> createState() => _TelaPerfilState();
 }
+
 class _TelaPerfilState extends State<TelaPerfil> {
   @override
   Widget build(BuildContext context) {
