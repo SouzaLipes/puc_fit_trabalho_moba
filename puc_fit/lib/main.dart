@@ -4,6 +4,7 @@ import 'exercise_screen.dart';
 import 'days_screen.dart';
 import 'package:puclifters/loginpage.dart';
 import 'chave_de_acesso.dart';
+import 'perfil_usuario.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/imc': (context) => IMCCalculator(),
         '/login': (context) => LoginPage(),
         '/chave': (context) => RegisterPage(),
+        '/perfil': (context) => UserProfile(),
       },
     );
   }
