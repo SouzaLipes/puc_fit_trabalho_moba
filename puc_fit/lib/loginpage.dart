@@ -38,16 +38,20 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 16),
                   const TextField(
                     decoration: InputDecoration(
-                      hintText: 'Matricula',
-                      border: OutlineInputBorder(),
-                    ),
+                        hintText: 'Matricula',
+                        hintStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        )),
                   ),
                   const SizedBox(height: 8),
                   const TextField(
                     decoration: InputDecoration(
                       hintText: 'Chave de acesso',
-                      border: OutlineInputBorder(),
-                    ),
+                        hintStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        )),
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(

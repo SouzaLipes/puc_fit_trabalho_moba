@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:puclifters/models/mycolors.dart'; // Certifique-se de importar corretamente suas cores personalizadas
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -33,69 +34,133 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[100],
-      appBar: AppBar(
-        title: const Text('Cadastro'),
-        backgroundColor: Colors.blue[500],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Nome'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu nome';
-                  }
-                  return null;
-                },
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  MyAppColors.azulEscuro,
+                  MyAppColors.verdeClaro,
+                ],
               ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, insira seu email';
-                  }
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Insira um email válido';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Senha'),
-                obscureText: true,
-                controller: _passwordController,
-                validator: _validatePassword,
-              ),
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: 'Confirme a Senha'),
-                obscureText: true,
-                controller: _confirmPasswordController,
-                validator: _validateConfirmPassword,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // Se todos os campos forem válidos, exibir uma mensagem
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Cadastro realizado com sucesso!')),
-                    );
-                  }
-                },
-                child: const Text('Register'),
-              ),
-            ],
+            ),
           ),
-        ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                    Image.asset('assets/logo.png', height: 150),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Nome',
+                        hintStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        border: const OutlineInputBorder(),
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, insira seu nome';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        border: const OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      style: const TextStyle(color: Colors.white),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, insira seu email';
+                        }
+                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                          return 'Insira um email válido';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Senha',
+                        hintStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        border: const OutlineInputBorder(),
+                      ),
+                      obscureText: true,
+                      controller: _passwordController,
+                      style: const TextStyle(color: Colors.white),
+                      validator: _validatePassword,
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Confirme a Senha',
+                        hintStyle: const TextStyle(color: Colors.white),
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        border: const OutlineInputBorder(),
+                      ),
+                      obscureText: true,
+                      controller: _confirmPasswordController,
+                      style: const TextStyle(color: Colors.white),
+                      validator: _validateConfirmPassword,
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Cadastro realizado com sucesso!'),
+                            ),
+                          );
+                        }
+                      },
+                      child: const Text('Cadastrar'),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

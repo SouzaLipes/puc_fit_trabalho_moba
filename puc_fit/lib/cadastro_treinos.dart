@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Treino',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const TreinoPage(),
-    );
-  }
-}
+import 'tela_calculo_imc.dart';
+import 'calendario_treinos.dart';
+import 'perfil_usuario.dart'; // Import da tela de perfil
 
 class TreinoPage extends StatelessWidget {
   const TreinoPage({super.key});
@@ -39,16 +23,86 @@ class TreinoPage extends StatelessWidget {
     );
   }
 
+  // Função para abrir o modal de perfil
+  void _showProfileModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: const SizedBox(
+            height: 600,
+            child: TelaPerfil(), // Modal com os dados do perfil
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF3A3A53),
         title: const Text('LOGO'),
+        leading: PopupMenuButton<int>(
+          icon: const Icon(Icons.menu),
+          onSelected: (int result) {
+            if (result == 1) {
+              // Ação para Configurações
+            } else if (result == 2) {
+              // Ação para Sobre
+            } else if (result == 3) {
+              // Ação para Sair
+            }
+          },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+            PopupMenuItem<int>(
+              value: 1,
+              child: ListTile(
+                title: const Text('IMC'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => IMCCalculator(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            PopupMenuItem<int>(
+              value: 2,
+              child: ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text('Calendário de treinos'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CalendarioTreinos(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const PopupMenuItem<int>(
+              value: 3,
+              child: ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Sair'),
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.account_circle),
-            onPressed: () {},
+            onPressed: () {
+              _showProfileModal(context); // Abrindo modal de perfil
+            },
           ),
         ],
       ),
@@ -61,7 +115,7 @@ class TreinoPage extends StatelessWidget {
           children: List.generate(6, (index) {
             return GestureDetector(
               onTap: () => _showExerciseModal(context),
-              child: Card(
+              child: const Card(
                 color: const Color(0xFF4A90E2),
                 child: const Center(
                   child: Text(
@@ -99,7 +153,7 @@ class ExerciseScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
-            'Escolha a parte do Exercício:',
+            'Exercícios feitos:',
             style: TextStyle(
               fontSize: 20,
               color: Colors.black,
@@ -148,11 +202,11 @@ class ExerciseScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const ExerciseItem(
-              exerciseName: 'Exercicio 1: exemplo-exercicio', repetitions: 3),
+              exerciseName: 'Exercício 1: exemplo-exercício', repetitions: 3),
           const ExerciseItem(
-              exerciseName: 'Exercicio 2: exemplo-exercicio', repetitions: 3),
+              exerciseName: 'Exercício 2: exemplo-exercício', repetitions: 3),
           const ExerciseItem(
-              exerciseName: 'Exercicio 3: exemplo-exercicio', repetitions: 3),
+              exerciseName: 'Exercício 3: exemplo-exercício', repetitions: 3),
           const Spacer(),
           Container(
             height: 50,
