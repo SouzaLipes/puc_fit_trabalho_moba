@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'calendario_treinos.dart';
+import 'perfil_usuario.dart';
+import 'models/usuario.dart';
+import 'cadastro_treinos.dart';
+import 'package:flutter/services.dart';
+import 'loginpage.dart';
 
 class IMCCalculator extends StatefulWidget {
-  const IMCCalculator({super.key});
+    final Usuario usuario;
+
+  const IMCCalculator({super.key, required this.usuario});
 
   @override
   _IMCCalculatorState createState() => _IMCCalculatorState();
@@ -132,60 +140,147 @@ class _IMCCalculatorState extends State<IMCCalculator> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[900],
-        leading: IconButton(
+        title: const Text("Calculadora de IMC"),
+        leading: PopupMenuButton<int>(
           icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        title: const Center(child: Text("LOGO")),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Calcular IMC',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+          onSelected: (int result) {
+            if (result == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TreinoPage(usuario: widget.usuario)),
+              );
+            } else if (result == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => IMCCalculator(usuario: widget.usuario)),
+              );
+            } else if (result == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CalendarioTreinos(usuario: widget.usuario)),
+              );
+            } else if (result == 4) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TelaPerfil(usuario: widget.usuario)),
+              );
+            } else if (result == 5) {
+                  Navigator.pop(context); // Fecha o PopupMenu
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(), // Navega para a tela de login
+                    ),
+                  );
+            }
+          },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+            const PopupMenuItem<int>(
+              value: 1,
+              child: ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Cadastro de Treinos'),
               ),
             ),
-            const SizedBox(height: 30),
-            TextField(
-              controller: _alturaController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: 'Qual Sua Altura (metros)?',
-                border: OutlineInputBorder(),
+            const PopupMenuItem<int>(
+              value: 2,
+              child: ListTile(
+                leading: Icon(Icons.calculate_outlined),
+                title: Text('IMC'),
               ),
             ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _pesoController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: 'Qual Seu peso (quilos)?',
-                border: OutlineInputBorder(),
+            const PopupMenuItem<int>(
+              value: 3,
+              child: ListTile(
+                leading: Icon(Icons.calendar_today),
+                title: Text('Calendário de treinos'),
               ),
             ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: _calcularIMC,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                textStyle: const TextStyle(fontSize: 18),
+            const PopupMenuItem<int>(
+              value: 4,
+              child: ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('Perfil do usuário'),
               ),
-              child: const Text('Calcular'),
+            ),
+            const PopupMenuItem<int>(
+              value: 5,
+              child: ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Sair'),
+              ),
             ),
           ],
+        ),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white, Colors.white],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'Calcular IMC',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 30),
+                TextField(
+                  controller: _alturaController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Qual Sua Altura (centímetros)?',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: _pesoController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Qual Seu peso (quilos)?',
+                    hintStyle: const TextStyle(color: Colors.black),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: _calcularIMC,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 15),
+                    textStyle: const TextStyle(fontSize: 18),
+                  ),
+                  child: const Text('Calcular'),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

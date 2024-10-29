@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/exercice': (context) => TreinoPage(usuario: usuario),
-        '/': (context) => const IMCCalculator(),
+        '/': (context) =>  IMCCalculator(usuario: usuario),
         '/login': (context) => const LoginPage(),
         '/chave': (context) => const RegisterPage(),
         '/perfil': (context) => TelaPerfil(usuario: usuario),
-        '/calendarioTreinos': (context) => CalendarioTreinos(),
+        '/calendarioTreinos': (context) => CalendarioTreinos(usuario: usuario),
       },
     );
   }

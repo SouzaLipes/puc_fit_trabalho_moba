@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'perfil_usuario.dart';
+import 'models/usuario.dart';
+import 'cadastro_treinos.dart';
+import 'tela_calculo_imc.dart';
+import 'package:flutter/services.dart';
+import 'loginpage.dart';
 
 class CalendarioTreinos extends StatelessWidget {
   final List<String> days = [
@@ -11,7 +17,9 @@ class CalendarioTreinos extends StatelessWidget {
     'Dia 07/01/2024',
   ];
 
-  CalendarioTreinos({super.key});
+  final Usuario usuario; // Adicione esta variável para passar o usuário
+
+  CalendarioTreinos({super.key, required this.usuario}); // Adicione o parâmetro no construtor
 
   void _showExercisesDialog(BuildContext context, String day) {
     showDialog(
@@ -57,17 +65,78 @@ class CalendarioTreinos extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[900],
-        leading: IconButton(
+        title: const Center(child: Text("Calendário de Treinos")),
+        leading: PopupMenuButton<int>(
           icon: const Icon(Icons.menu),
-          onPressed: () {},
+          onSelected: (int result) {
+            if (result == 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TreinoPage(usuario: usuario)),
+              );
+            } else if (result == 2) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => IMCCalculator(usuario: usuario)),
+              );
+            } else if (result == 3) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CalendarioTreinos(usuario: usuario)),
+              );
+            } else if (result == 4) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TelaPerfil(usuario: usuario)),
+              );
+            } else if (result == 5) {
+                  Navigator.pop(context); // Fecha o PopupMenu
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(), // Navega para a tela de login
+                    ),
+                  );
+            }
+          },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+            const PopupMenuItem<int>(
+              value: 1,
+              child: ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Cadastro de Treinos'),
+              ),
+            ),
+            const PopupMenuItem<int>(
+              value: 2,
+              child: ListTile(
+                leading: Icon(Icons.calculate_outlined),
+                title: Text('IMC'),
+              ),
+            ),
+            const PopupMenuItem<int>(
+              value: 3,
+              child: ListTile(
+                leading: Icon(Icons.calendar_today),
+                title: Text('Calendário de treinos'),
+              ),
+            ),
+            const PopupMenuItem<int>(
+              value: 4,
+              child: ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('Perfil do usuário'),
+              ),
+            ),
+            const PopupMenuItem<int>(
+              value: 5,
+              child: ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Sair'),
+              ),
+            ),
+          ],
         ),
-        title: const Center(child: Text("LOGO")),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
-        ],
       ),
       backgroundColor: Colors.grey[300],
       body: Padding(

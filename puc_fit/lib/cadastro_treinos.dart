@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'models/usuario.dart';
 import 'tela_calculo_imc.dart';
 import 'calendario_treinos.dart';
-import 'perfil_usuario.dart'; // Import da tela de perfil
+import 'perfil_usuario.dart'; 
+import 'loginpage.dart';
+import 'package:flutter/services.dart';
+
 
 class TreinoPage extends StatelessWidget {
   final Usuario usuario;
@@ -64,15 +67,15 @@ class TreinoPage extends StatelessWidget {
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
             PopupMenuItem<int>(
-              value: 1,
+              value: 1, // Escolha um valor único para este item
               child: ListTile(
-                leading: const Icon(Icons.calculate_outlined),
-                title: const Text('IMC'),
+                leading: const Icon(Icons.edit),
+                title: const Text('Cadastro de Treinos'),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const IMCCalculator(),
+                      builder: (context) => TreinoPage(usuario: usuario),
                     ),
                   );
                 },
@@ -81,13 +84,13 @@ class TreinoPage extends StatelessWidget {
             PopupMenuItem<int>(
               value: 2,
               child: ListTile(
-                leading: const Icon(Icons.info),
-                title: const Text('Calendário de treinos'),
+                leading: const Icon(Icons.calculate_outlined),
+                title: const Text('IMC'),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CalendarioTreinos(),
+                      builder: (context) => IMCCalculator(usuario: usuario),
                     ),
                   );
                 },
@@ -95,6 +98,21 @@ class TreinoPage extends StatelessWidget {
             ),
             PopupMenuItem<int>(
               value: 3,
+              child: ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text('Calendário de treinos'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CalendarioTreinos(usuario: usuario),
+                    ),
+                  );
+                },
+              ),
+            ),
+            PopupMenuItem<int>(
+              value: 4,
               child: ListTile(
                 leading: const Icon(Icons.account_circle),
                 title: const Text('Perfil do usuário'),
@@ -108,11 +126,20 @@ class TreinoPage extends StatelessWidget {
                 },
               ),
             ),
-            const PopupMenuItem<int>(
-              value: 4,
+            PopupMenuItem<int>(
+              value: 5,
               child: ListTile(
-                leading: Icon(Icons.logout),
-                title: Text('Sair'),
+                leading: const Icon(Icons.logout),
+                title: const Text('Sair'),
+                onTap: () {
+                  Navigator.pop(context); // Fecha o PopupMenu
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(), // Navega para a tela de login
+                    ),
+                  );
+                },
               ),
             ),
           ],
