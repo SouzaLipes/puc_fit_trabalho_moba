@@ -39,17 +39,17 @@ class _LoginPageState extends State<LoginPage> {
                   const TextField(
                     decoration: InputDecoration(
                         hintText: 'Matricula',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        enabledBorder: const OutlineInputBorder(
+                        hintStyle: TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         )),
                   ),
                   const SizedBox(height: 8),
                   const TextField(
                     decoration: InputDecoration(
-                      hintText: 'Chave de acesso',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        enabledBorder: const OutlineInputBorder(
+                        hintText: 'Chave de acesso',
+                        hintStyle: TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         )),
                   ),

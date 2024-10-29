@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'editar_perfil.dart';
+import 'models/usuario.dart';
 
 class TelaPerfil extends StatefulWidget {
-  const TelaPerfil({super.key});
+  final Usuario usuario;
+
+  const TelaPerfil({super.key, required this.usuario});
+
   @override
   State<TelaPerfil> createState() => _TelaPerfilState();
 }
 
 class _TelaPerfilState extends State<TelaPerfil> {
+  late Usuario usuario;
+
+  @override
+  void initState() {
+    super.initState();
+    usuario = widget.usuario;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +40,11 @@ class _TelaPerfilState extends State<TelaPerfil> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Imagem centralizada
                 const CircleAvatar(
                   radius: 60,
                   backgroundImage: AssetImage('assets/3x4.png'),
                 ),
                 const SizedBox(height: 20),
-                // Nome do usuário
                 const Text(
                   'Nome do Usuário',
                   style: TextStyle(
@@ -43,57 +54,71 @@ class _TelaPerfilState extends State<TelaPerfil> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // Detalhes do perfil envolto por um Card
                 Card(
                   color: Colors.white.withOpacity(0.9),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   elevation: 5,
-                  child: const Padding(
-                    padding: EdgeInsets.all(16.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProfileDetailRow(
                           icon: Icons.person_outline,
                           label: 'Código Pessoa',
-                          value: '9985635',
+                          value: usuario.codigoPessoa,
                         ),
                         ProfileDetailRow(
                           icon: Icons.calendar_today_outlined,
                           label: 'Idade',
-                          value: '30 anos',
+                          value: usuario.idade,
                         ),
                         ProfileDetailRow(
                           icon: Icons.male_outlined,
                           label: 'Gênero',
-                          value: 'Masculino',
+                          value: usuario.genero,
                         ),
                         ProfileDetailRow(
                           icon: Icons.fitness_center_outlined,
                           label: 'Peso',
-                          value: '80 quilos',
+                          value: usuario.peso,
                         ),
                         ProfileDetailRow(
                           icon: Icons.height_outlined,
                           label: 'Altura',
-                          value: '180 cm',
+                          value: usuario.altura,
                         ),
                         ProfileDetailRow(
                           icon: Icons.calculate_outlined,
                           label: 'IMC',
-                          value: '26,4',
+                          value: usuario.imc,
                         ),
                         ProfileDetailRow(
                           icon: Icons.flag_outlined,
                           label: 'Objetivos',
-                          value:
-                              'Perder Gordura, Condicionamento Físico, Qualidade de Vida',
+                          value: usuario.objetivos,
                         ),
                       ],
                     ),
                   ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    final novoUsuario = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditarPerfil(usuario: usuario),
+                      ),
+                    );
+                    if (novoUsuario != null) {
+                      setState(() {
+                        usuario = novoUsuario;
+                      });
+                    }
+                  },
+                  child: const Text('Editar Perfil'),
                 ),
               ],
             ),
@@ -103,23 +128,25 @@ class _TelaPerfilState extends State<TelaPerfil> {
     );
   }
 }
+
 class ProfileDetailRow extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
+
   const ProfileDetailRow({
     super.key,
     required this.icon,
     required this.label,
     required this.value,
   });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment
-            .start, // Para alinhar texto que pode ter várias linhas
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, color: Colors.blueAccent),
           const SizedBox(width: 10),
@@ -130,15 +157,13 @@ class ProfileDetailRow extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          // Ajustando para texto multilinhas
           Expanded(
             child: Text(
               value,
               style: const TextStyle(
                 fontSize: 16,
               ),
-              softWrap:
-                  true, // Permite que o texto seja quebrado em múltiplas linhas
+              softWrap: true,
             ),
           ),
         ],

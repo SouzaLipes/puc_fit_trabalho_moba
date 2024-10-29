@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'models/usuario.dart';
 import 'tela_calculo_imc.dart';
 import 'calendario_treinos.dart';
 import 'perfil_usuario.dart'; // Import da tela de perfil
 
 class TreinoPage extends StatelessWidget {
-  const TreinoPage({super.key});
+  final Usuario usuario;
+
+  const TreinoPage({super.key, required this.usuario});
 
   void _showExerciseModal(BuildContext context) {
     showDialog(
@@ -23,7 +26,6 @@ class TreinoPage extends StatelessWidget {
     );
   }
 
-  // Função para abrir o modal de perfil
   void _showProfileModal(BuildContext context) {
     showDialog(
       context: context,
@@ -32,9 +34,9 @@ class TreinoPage extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          child: const SizedBox(
+          child: SizedBox(
             height: 600,
-            child: TelaPerfil(), // Modal com os dados do perfil
+            child: TelaPerfil(usuario: usuario),
           ),
         );
       },
@@ -51,10 +53,12 @@ class TreinoPage extends StatelessWidget {
           icon: const Icon(Icons.menu),
           onSelected: (int result) {
             if (result == 1) {
-              // Ação para Configurações
+              // Ação para IMC
             } else if (result == 2) {
-              // Ação para Sobre
+              // Ação para Calendário de treinos
             } else if (result == 3) {
+              // Ação para Perfil do usuário
+            } else if (result == 4) {
               // Ação para Sair
             }
           },
@@ -62,12 +66,13 @@ class TreinoPage extends StatelessWidget {
             PopupMenuItem<int>(
               value: 1,
               child: ListTile(
+                leading: const Icon(Icons.calculate_outlined),
                 title: const Text('IMC'),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => IMCCalculator(),
+                      builder: (context) => const IMCCalculator(),
                     ),
                   );
                 },
@@ -88,8 +93,23 @@ class TreinoPage extends StatelessWidget {
                 },
               ),
             ),
-            const PopupMenuItem<int>(
+            PopupMenuItem<int>(
               value: 3,
+              child: ListTile(
+                leading: const Icon(Icons.account_circle),
+                title: const Text('Perfil do usuário'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelaPerfil(usuario: usuario),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const PopupMenuItem<int>(
+              value: 4,
               child: ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('Sair'),
@@ -101,7 +121,7 @@ class TreinoPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.account_circle),
             onPressed: () {
-              _showProfileModal(context); // Abrindo modal de perfil
+              _showProfileModal(context);
             },
           ),
         ],
@@ -116,8 +136,8 @@ class TreinoPage extends StatelessWidget {
             return GestureDetector(
               onTap: () => _showExerciseModal(context),
               child: const Card(
-                color: const Color(0xFF4A90E2),
-                child: const Center(
+                color: Color(0xFF4A90E2),
+                child: Center(
                   child: Text(
                     'Perna',
                     style: TextStyle(

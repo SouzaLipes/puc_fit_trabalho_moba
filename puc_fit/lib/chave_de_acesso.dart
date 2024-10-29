@@ -61,16 +61,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     Image.asset('assets/logo.png', height: 150),
                     const SizedBox(height: 16),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Nome',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        enabledBorder: const OutlineInputBorder(
+                        hintStyle: TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        focusedBorder: const OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(),
                       ),
                       style: const TextStyle(color: Colors.white),
                       validator: (value) {
@@ -82,16 +82,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Email',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        enabledBorder: const OutlineInputBorder(
+                        hintStyle: TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        focusedBorder: const OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(),
                       ),
                       keyboardType: TextInputType.emailAddress,
                       style: const TextStyle(color: Colors.white),
@@ -107,16 +107,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Senha',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        enabledBorder: const OutlineInputBorder(
+                        hintStyle: TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        focusedBorder: const OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(),
                       ),
                       obscureText: true,
                       controller: _passwordController,
@@ -125,16 +125,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Confirme a Senha',
-                        hintStyle: const TextStyle(color: Colors.white),
-                        enabledBorder: const OutlineInputBorder(
+                        hintStyle: TextStyle(color: Colors.white),
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        focusedBorder: const OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
                         ),
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(),
                       ),
                       obscureText: true,
                       controller: _confirmPasswordController,

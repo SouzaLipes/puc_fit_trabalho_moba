@@ -1,0 +1,28 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "puc_fit",
+      "cwd": "puc_fit",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "puc_fit (profile mode)",
+      "cwd": "puc_fit",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "puc_fit (release mode)",
+      "cwd": "puc_fit",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ class ExerciosFeitosDia extends StatelessWidget {
     'Prancha',
   ];
 
-  ExerciosFeitosDia({required this.day});
+  ExerciosFeitosDia({super.key, required this.day});
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +19,27 @@ class ExerciosFeitosDia extends StatelessWidget {
       appBar: AppBar(
         title: Text('Ficha de Exercícios - $day'),
       ),
-      backgroundColor: Colors.grey[300], 
+      backgroundColor: Colors.grey[300],
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Card(
-            color: Color(0xFF4C5285), 
+            color: const Color(0xFF4C5285),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  const Text(
                     'Lista de Exercícios Feitos',
                     style: TextStyle(
-                      color: Colors.white, 
+                      color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 10.0), 
+                  const SizedBox(height: 10.0),
                   Expanded(
                     child: ListView.builder(
                       itemCount: exercises.length,
@@ -48,8 +48,8 @@ class ExerciosFeitosDia extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 4.0),
                           child: Text(
                             exercises[index],
-                            style: TextStyle(
-                              color: Colors.white, 
+                            style: const TextStyle(
+                              color: Colors.white,
                               fontSize: 16,
                             ),
                           ),

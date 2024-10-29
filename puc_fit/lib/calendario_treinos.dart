@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'exercicios_feito_dia.dart';
 
 class CalendarioTreinos extends StatelessWidget {
   final List<String> days = [
